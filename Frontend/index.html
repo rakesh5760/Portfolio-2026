@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rakesh Gone | Developer Portfolio</title>
+    <meta
+      name="description"
+      content="Modern interactive portfolio of Rakesh Gone - Full-stack learner, data enthusiast, and automation-focused developer."
+    />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Animated gradient background layer -->
+    <div class="bg-orb orb-1" aria-hidden="true"></div>
+    <div class="bg-orb orb-2" aria-hidden="true"></div>
+
+    <!-- Sticky navigation with mobile toggle -->
+    <header class="site-header" id="top">
+      <nav class="nav container">
+        <a href="#top" class="brand">Rakesh<span>.dev</span></a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about" data-nav>About</a></li>
+          <li><a href="#skills" data-nav>Skills</a></li>
+          <li><a href="#projects" data-nav>Projects</a></li>
+          <li><a href="#journey" data-nav>Journey</a></li>
+          <li><a href="#certifications" data-nav>Certifications</a></li>
+          <li><a href="#contact" data-nav>Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO: typing effect and intro CTA -->
+      <section class="hero section" id="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow reveal">Aspiring Full-Stack + Data Developer</p>
+            <h1 class="hero-title reveal">
+              I build
+              <span id="typingText" class="typing" aria-live="polite"></span>
+            </h1>
+            <p class="hero-subtitle reveal delay-1">
+              Computer Science student creating practical products with Python, analytics,
+              APIs, and automation for real-world impact.
+            </p>
+            <div class="hero-actions reveal delay-2">
+              <a href="#projects" class="btn btn-primary">View Projects</a>
+              <a href="#contact" class="btn btn-ghost">Contact</a>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal delay-2">
+            <!-- Replace this source with your own portrait later -->
+            <img
+              class="profile-image"
+              src="pic.jpeg"
+              alt="Rakesh profile placeholder"
+            />
+            <div class="status-pill">Open to internships • 2026/27</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT with reveal animation -->
+      <section id="about" class="section">
+        <div class="container">
+          <h2 class="section-title reveal">About Me</h2>
+          <p class="about-text reveal delay-1">
+            I'm Rakesh Gone, currently pursuing B.Tech in Computer Science at Bharath Institute
+            of Higher Education and Research, Chennai (2023–2027). I focus on building polished,
+            useful digital solutions at the intersection of web development, data analytics,
+            and automation.
+          </p>
+        </div>
+      </section>
+
+      <!-- SKILLS with icons and proficiency bars -->
+      <section id="skills" class="section section-alt">
+        <div class="container">
+          <h2 class="section-title reveal">Skills</h2>
+          <div class="skills-grid">
+            <article class="glass skill-card reveal" data-level="78">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/python.svg" alt="Python logo" />
+              <h3>Python</h3>
+              <div class="meter"><span></span></div>
+            </article>
+            <article class="glass skill-card reveal" data-level="70">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/mysql.svg" alt="SQL logo" />
+              <h3>SQL</h3>
+              <div class="meter"><span></span></div>
+            </article>
+            <article class="glass skill-card reveal" data-level="95">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/html5.svg" alt="HTML logo" />
+              <h3>HTML</h3>
+              <div class="meter"><span></span></div>
+            </article>
+            <article class="glass skill-card reveal" data-level="90">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/css3.svg" alt="CSS logo" />
+              <h3>CSS</h3>
+              <div class="meter"><span></span></div>
+            </article>
+            <article class="glass skill-card reveal" data-level="60">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/javascript.svg" alt="JavaScript logo" />
+              <h3>JavaScript</h3>
+              <div class="meter"><span></span></div>
+            </article>
+            <article class="glass skill-card reveal" data-level="88">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/powerbi.svg" alt="Power BI logo" />
+              <h3>Power BI</h3>
+              <div class="meter"><span></span></div>
+            </article>
+            <article class="glass skill-card reveal" data-level="80">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoftexcel.svg" alt="Excel logo" />
+              <h3>Excel</h3>
+              <div class="meter"><span></span></div>
+            </article>
+            <article class="glass skill-card reveal" data-level="83">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/openapiinitiative.svg" alt="API logo" />
+              <h3>APIs</h3>
+              <div class="meter"><span></span></div>
+            </article>
+            <article class="glass skill-card reveal" data-level="79">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/fastapi.svg" alt="FastAPI logo" />
+              <h3>FastAPI / Flask</h3>
+              <div class="meter"><span></span></div>
+            </article>
+            <article class="glass skill-card reveal" data-level="60">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/n8n.svg" alt="n8n" />
+              <h3>n8n</h3>
+              <div class="meter"><span></span></div>
+            </article>
+
+            <article class="glass skill-card reveal" data-level="70">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/scrapy.svg" alt="Web Scraping" />
+              <h3>Web Scraping</h3>
+              <div class="meter"><span></span></div>
+            </article>
+
+            <article class="glass skill-card reveal" data-level="80">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/openapiinitiative.svg" alt="API Integrations">
+              <h3>API Integrations</h3>
+              <div class="meter"><span></span></div>
+            </article>
+
+            <article class="glass skill-card reveal" data-level="80">
+              <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googleanalytics.svg" alt="Workflow Automation" />
+              <h3>Workflow Automation</h3>
+              <div class="meter"><span></span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+
+      <!--https://www.streamlinehq.com/icons/download/n8n--31088        https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/n8n.svg-->
+
+      <!-- PROJECTS: filter controls + animated cards -->
+      <section id="projects" class="section">
+        <div class="container">
+          <h2 class="section-title reveal">Projects</h2>
+
+          <div class="filter-group reveal delay-1" id="projectFilters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="data">Data</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="automation">Automation</button>
+          </div>
+
+          <div class="projects-grid" id="projectGrid">
+            <article class="glass project-card reveal" data-category="data ">
+              <h3>Solana Transaction Analyzer</h3>
+              <p>
+                Streamlit dashboard to analyze Solana wallet activity with Helius API integration
+                and actionable chain insights.
+              </p>
+              <div class="badges">
+                <span>Python</span><span>Streamlit</span><span>Helius API</span>
+              </div>
+            </article>
+
+            <article class="glass project-card reveal" data-category="data">
+              <h3>Superstore US Sales Dashboard</h3>
+              <p>
+                Power BI analytics experience featuring KPI widgets, slicers, and drill-downs
+                for fast business decision-making.
+              </p>
+              <div class="badges">
+                <span>Power BI</span><span>Data Modeling</span><span>BI Reporting</span>
+              </div>
+            </article>
+
+            <article class="glass project-card reveal" data-category="data automation">
+              <h3>Excel Data Cleaning Automations</h3>
+              <p>
+                Python micro-projects automating repetitive Excel cleanup workflows to save time
+                and improve data quality.
+              </p>
+              <div class="badges">
+                <span>Python</span><span>Excel</span><span>Automation</span>
+              </div>
+            </article>
+
+
+            <article class="glass project-card reveal" data-category="web">
+              <h3>Telangana Government Application Portal Hub</h3>
+              <p>
+                Centralized web portal for Telangana government application links and forms
+              </p>
+              <div class="badges">
+                <span>HTML</span><span>CSS</span>
+              </div>
+            </article>
+
+            <article class="glass project-card reveal" data-category="web">
+              <h3>VIBE SHOOTER (Hackathon Game)</h3>
+              <p>
+                Browser game demonstrating prompt engineering and AI-assisted creativity.</p>
+              <div class="badges">
+                <span>HTML</span><span>CSS</span><span>JavaScript</span>
+              </div>
+            </article>
+
+             <article class="glass project-card reveal" data-category="web">
+              <h3>StarryDelights.com – QA Freelancer</h3>
+              <p>
+               End-user testing and UX bug reporting for live US ecommerce site. </p>
+              <div class="badges">
+                <span>QA</span><span>UX Review</span><span>Testing</span>
+              </div>
+            </article>
+
+            <article class="glass project-card reveal" data-category="automation data">
+              <h3>Resume Data Extraction System (Freelance)</h3>
+              <p>
+               Automated extraction of resume fields into structured Excel datasets. </p>
+              <div class="badges">
+                <span>Python</span><span>Groq</span><span>Excel</span>
+              </div>
+            </article>
+
+            <article class="glass project-card reveal" data-category="automation">
+              <h3>Multiple n8n Chatbots</h3>
+              <p>
+               Designed and deployed chatbot workflows across different use cases. </p>
+              <div class="badges">
+                <span>n8n</span><span>Workflow Design</span>
+              </div>
+            </article>
+            <article class="glass project-card reveal" data-category="automation">
+              <h3>Small Business Chatbot (n8n)</h3>
+              <p>
+               Telegram/WhatsApp chatbot for replies, bookings, and deal management. </p>
+              <div class="badges">
+                <span>n8n</span><span>Chatbot</span><span>Automation</span>
+              </div>
+            </article>
+
+
+
+
+
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Journey timeline -->
+      <section id="journey" class="section section-alt">
+        <div class="container">
+          <h2 class="section-title reveal">Experience / Education Journey</h2>
+          <div class="timeline">
+            <article class="timeline-item reveal">
+              <div class="dot"></div>
+              <div class="glass panel">
+                <h3>B.Tech Computer Science</h3>
+                <p>Bharath Institute of Higher Education and Research, Chennai</p>
+                <p class="muted">2023 – 2027</p>
+              </div>
+            </article>
+
+            <article class="timeline-item reveal delay-1">
+              <div class="dot"></div>
+              <div class="glass panel">
+                <h3>Project-driven Technical Growth</h3>
+                <p>
+                  Focused on web apps, BI dashboards, APIs, and workflow automations with
+                  hands-on implementation and delivery mindset.
+                </p>
+                <p class="muted">Ongoing</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certifications as badges/cards -->
+      <section id="certifications" class="section">
+        <div class="container">
+          <h2 class="section-title reveal">Certifications</h2>
+          <div class="cert-grid">
+            <article class="glass cert-card reveal">
+              <h3>Google Cloud Skills Boost</h3>
+              <p>Cloud fundamentals and practical labs.</p>
+            </article>
+            <article class="glass cert-card reveal delay-1">
+              <h3>TCS Career Edge – Young Professional</h3>
+              <p>Career-readiness and professional skill development.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact with animated UI form -->
+      <section id="contact" class="section section-alt">
+        <div class="container contact-layout">
+          <div class="reveal">
+            <h2 class="section-title">Contact</h2>
+            <p class="muted">Let’s build useful products together.</p>
+            <p><strong>Email:</strong> <a href="mailto:gonerakeshgr@gmail.com">gonerakeshgr@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+918186992524">+91 81869 92524</a></p>
+            <div class="socials">
+              <a href="https://www.linkedin.com/in/rakesh-gone-2646a22b6/" aria-label="LinkedIn placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16" color="white">
+                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
+              </svg></a>
+              <a href="https://github.com/rakesh5760" aria-label="GitHub placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16" color="white">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"></path>
+              
+            </svg></a>
+              <a href="https://t.me/+918186992524" aria-label="X placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-telegram" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906q-1.168.486-4.666 2.01-.567.225-.595.442c-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294q.39.01.868-.32 3.269-2.206 3.374-2.23c.05-.012.12-.026.166.016s.042.12.037.141c-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8 8 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629q.14.092.27.187c.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.4 1.4 0 0 0-.013-.315.34.34 0 0 0-.114-.217.53.53 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09"></path>
+              </svg></a>
+            </div>
+
+            <a class="btn btn-primary resume-btn" style="color: #ffffff;"  href="Rakesh_DA_RESUME.pdf" download><b>Download Resume </b></a>
+          </div>
+
+          <form class="glass contact-form reveal delay-1" id="contactForm">
+            
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="Your email" required />
+            </label>
+            <label>
+              Phone
+              <input type="text" name="phone" placeholder="Your phone number" />
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="4" placeholder="Tell me about your project" required></textarea>
+            </label>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> Rakesh Gone</p>
+        <p>Built by Rakesh Gone</p>
+      </div>
+    </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+  (function(){
+    emailjs.init("XJSR2toJLtHYPoFJ2-VYA");
+  })();
+</script>
+
+<script src="script.js"></script>
+
+
+  </body>
+</html>
