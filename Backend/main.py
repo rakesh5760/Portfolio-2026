@@ -3,6 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import smtplib
 from email.message import EmailMessage
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+SENDER_EMAIL = os.getenv("EMAIL")
+SENDER_PASSWORD = os.getenv("APP_PASSWORD")
 
 app = FastAPI()
 
@@ -30,15 +37,17 @@ async def send_contact(
     message: str = Form(...)
 ):
     try:
-       
-        sender_email = "gonerakesh8186@gmail.com"
-        sender_password = "kzhm jyaa vkdk ftjs"
+        if not SENDER_EMAIL or not SENDER_PASSWORD:
+            return JSONResponse(
+                status_code=500,
+                content={"success": False, "error": "Internal server configuration error."}
+            )
 
         # Create Email
         msg = EmailMessage()
         msg["Subject"] = "New Portfolio Contact Message"
-        msg["From"] = sender_email
-        msg["To"] = sender_email
+        msg["From"] = SENDER_EMAIL
+        msg["To"] = SENDER_EMAIL
 
         msg.set_content(f"""
 New Message From Portfolio:
@@ -53,7 +62,7 @@ Message:
 
         # 🔌 SMTP Connection
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-            smtp.login(sender_email, sender_password)
+            smtp.login(SENDER_EMAIL, SENDER_PASSWORD)
             smtp.send_message(msg)
 
         return {"success": True}
