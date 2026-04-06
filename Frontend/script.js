@@ -2,7 +2,7 @@
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
 
-// ---------- Footer year ----------
+// ---------- Initializers ----------
 $('#year').textContent = new Date().getFullYear();
 
 // ---------- Mobile nav ----------
@@ -21,154 +21,186 @@ $$('[data-nav]').forEach((link) => {
   });
 });
 
+// ---------- Scroll Progress Bar ----------
+const scrollProgress = $('#scrollProgress');
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  scrollProgress.style.width = `${scrolled}%`;
+});
+
 // ---------- Typing effect ----------
 const typingTarget = $('#typingText');
 const words = ['startup-grade web apps.', 'data-driven dashboards.', 'automation workflows.'];
-let wordIndex = 0;
-let charIndex = 0;
-let deleting = false;
+let wordIndex = 0, charIndex = 0, deleting = false;
 
 function typeLoop() {
   const currentWord = words[wordIndex];
-
   if (!deleting) {
-    charIndex += 1;
+    charIndex++;
     typingTarget.textContent = currentWord.slice(0, charIndex);
-
-    if (charIndex === currentWord.length) {
-      deleting = true;
-      return setTimeout(typeLoop, 1200);
-    }
+    if (charIndex === currentWord.length) { deleting = true; return setTimeout(typeLoop, 1500); }
   } else {
-    charIndex -= 1;
+    charIndex--;
     typingTarget.textContent = currentWord.slice(0, charIndex);
-
-    if (charIndex === 0) {
-      deleting = false;
-      wordIndex = (wordIndex + 1) % words.length;
-    }
+    if (charIndex === 0) { deleting = false; wordIndex = (wordIndex + 1) % words.length; }
   }
-
-  const speed = deleting ? 45 : 85;
-  setTimeout(typeLoop, speed);
+  setTimeout(typeLoop, deleting ? 50 : 100);
 }
-
 typeLoop();
 
-// ---------- Scroll reveal + skill meter animation ----------
-const revealEls = $$('.reveal');
-
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-
+// ---------- Intersection Observer (Reveal + Meter) ----------
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
       entry.target.classList.add('is-visible');
-
-      // Animate skill progress when cards come into view.
       if (entry.target.classList.contains('skill-card')) {
         const level = entry.target.getAttribute('data-level') || 0;
         const bar = $('span', $('.meter', entry.target));
-        bar.style.width = `${level}%`;
+        if (bar) bar.style.width = `${level}%`;
       }
-
       revealObserver.unobserve(entry.target);
-    });
-  },
-  { threshold: 0.16 }
-);
+    }
+  });
+}, { threshold: 0.15 });
+$$('.reveal').forEach(el => revealObserver.observe(el));
 
-revealEls.forEach((el) => revealObserver.observe(el));
-
-// ---------- Active nav highlight on section change ----------
-const sectionEls = $$('main section[id]');
-const navAnchors = $$('[data-nav]');
-
-const navObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      navAnchors.forEach((link) => {
-        const isMatch = link.getAttribute('href') === `#${entry.target.id}`;
-        link.classList.toggle('active', isMatch);
+// ---------- Active nav highlight ----------
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      $$('[data-nav]').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
       });
-    });
-  },
-  {
-    rootMargin: '-40% 0px -50% 0px',
-    threshold: 0.02,
-  }
-);
-
-sectionEls.forEach((section) => navObserver.observe(section));
+    }
+  });
+}, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
+$$('main section[id]').forEach(section => navObserver.observe(section));
 
 // ---------- Project filtering ----------
-const filterGroup = $('#projectFilters');
-const projectCards = $$('.project-card');
-
-filterGroup.addEventListener('click', (event) => {
-  const target = event.target.closest('.filter-btn');
+$('#projectFilters').addEventListener('click', (e) => {
+  const target = e.target.closest('.filter-btn');
   if (!target) return;
-
   const selected = target.getAttribute('data-filter');
-
-  $$('.filter-btn', filterGroup).forEach((btn) => btn.classList.remove('active'));
+  $$('.filter-btn', $('#projectFilters')).forEach(btn => btn.classList.remove('active'));
   target.classList.add('active');
 
-  projectCards.forEach((card) => {
-    const categories = card.getAttribute('data-category') || '';
-    const show = selected === 'all' || categories.includes(selected);
-
-    card.classList.toggle('hide', !show);
+  $$('.project-card').forEach(card => {
+    const show = selected === 'all' || card.getAttribute('data-category').includes(selected);
     card.style.display = show ? '' : 'none';
-
-    if (show) {
-      card.animate(
-        [
-          { opacity: 0, transform: 'translateY(10px) scale(0.98)' },
-          { opacity: 1, transform: 'translateY(0) scale(1)' },
-        ],
-        { duration: 280, easing: 'ease-out' }
-      );
-    }
+    if (show) card.animate([{ opacity: 0, transform: 'scale(0.95)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 300 });
   });
 });
 
-// ---------- Contact form (demo interaction only) ----------
-const contactForm = document.getElementById("contactForm");
-const formNote = document.getElementById("formNote");
+// ---------- Modal System ----------
+const modalOverlay = $('#modalOverlay');
+const modalBody = $('#modalBody');
+const modalClose = $('#modalClose');
 
-contactForm.addEventListener("submit", async function (e) {
+const projectData = {
+  'solana': {
+    title: 'Solana Transaction Analyzer',
+    tags: ['Python', 'Streamlit', 'Helius API'],
+    description: 'A deep-dive analytics dashboard that pulls real-time data from the Solana blockchain. It provides wallet behavior insights, transaction volume heatmaps, and whale tracking alerts.',
+    links: { github: '#', demo: '#' }
+  },
+  'superstore': {
+    title: 'Superstore US Sales Dashboard',
+    tags: ['Power BI', 'Data Modeling', 'DAX'],
+    description: 'Comprehensive business intelligence report covering logistics, profitability, and customer segmentation. Features interactive slicers and trend forecasting using DAX measures.',
+    links: { demo: '#' }
+  },
+  'excel': {
+    title: 'Excel Data Cleaning Automations',
+    tags: ['Python', 'Pandas', 'Openpyxl'],
+    description: 'A suite of scripts designed to handle messy enterprise-level Excel datasets. Automates deduplication, format normalization, and cross-sheet validation, reducing processing time by 90%.',
+    links: { github: '#' }
+  },
+  'syncly': {
+    title: 'Syncly (Full-Stack Contact Management System)',
+    tags: ['Python', 'FastAPI', 'React', 'MySQL', 'Google APIs', 'XML', 'Excel'],
+    description: 'Developed a full-stack contact management system using FastAPI and React to manage and organize large datasets. Implemented automated data ingestion via XML uploads and integrated Google People API for contact and calendar synchronization. Designed logic for duplicate detection and structured data handling to improve data consistency. Utilized MySQL and Excel for scalable data storage and retrieval.',
+    links: { github: '#' }
+  }
+};
+
+$$('.project-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const pid = card.getAttribute('data-project-id');
+    const data = projectData[pid];
+    if (!data) return;
+
+    modalBody.innerHTML = `
+      <div class="modal-body-content">
+        <h2>${data.title}</h2>
+        <div class="badge-row">
+          ${data.tags.map(t => `<span class="badge">${t}</span>`).join('')}
+        </div>
+        <p>${data.description}</p>
+        <div class="modal-links">
+          ${data.links.github ? `<a href="${data.links.github}" class="btn btn-primary">GitHub Code</a>` : ''}
+          ${data.links.demo ? `<a href="${data.links.demo}" class="btn btn-ghost">Live Demo</a>` : ''}
+        </div>
+      </div>
+    `;
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+modalClose.addEventListener('click', () => {
+  modalOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) modalClose.click();
+});
+
+// ---------- Resume Drawer Logic ----------
+const resumeDrawer = $('#resumeDrawer');
+const openResumeBtn = $('#openResume');
+const closeResumeBtn = $('#closeResume');
+const drawerOverlay = $('#drawerOverlay');
+
+const toggleResume = (open) => {
+  resumeDrawer.classList.toggle('active', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+  resumeDrawer.setAttribute('aria-hidden', String(!open));
+};
+
+openResumeBtn.addEventListener('click', () => toggleResume(true));
+closeResumeBtn.addEventListener('click', () => toggleResume(false));
+drawerOverlay.addEventListener('click', () => toggleResume(false));
+
+// ---------- Form Validation & Submission ----------
+const contactForm = $('#contactForm');
+const formNote = $('#formNote');
+
+contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-
-  const submitBtn = contactForm.querySelector("button");
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Sending...";
-  formNote.textContent = "Sending message...";
-
-  const formData = new FormData(contactForm);
+  const btn = $('button', contactForm);
+  btn.disabled = true;
+  btn.textContent = 'Launching...';
+  formNote.textContent = 'Syncing with orbital servers...';
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/contact", {
-      method: "POST",
-      body: formData
+    const response = await fetch('http://127.0.0.1:8000/contact', {
+      method: 'POST',
+      body: new FormData(contactForm)
     });
-
-    const result = await response.json();
-
-    if (response.ok && result.success) {
-      formNote.textContent = "✅ Message sent successfully!";
+    const res = await response.json();
+    if (response.ok && res.success) {
+      formNote.textContent = '✅ Message transmitted successfully!';
       contactForm.reset();
     } else {
-      formNote.textContent = "❌ Failed to send message.";
-      console.error("Backend error:", result);
+      throw new Error();
     }
-
-  } catch (error) {
-    console.error("Connection error:", error);
-    formNote.textContent = "❌ Server not reachable.";
+  } catch {
+    formNote.textContent = '❌ Transmission failed. Check link stability.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
   }
-
-  submitBtn.disabled = false;
-  submitBtn.textContent = "Send Message";
 });
