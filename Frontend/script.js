@@ -186,7 +186,7 @@ contactForm.addEventListener('submit', async (e) => {
   formNote.textContent = 'Syncing with orbital servers...';
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/contact', {
+    const response = await fetch('https://portfolio-2026-1-dwwe.onrender.com/contact', {
       method: 'POST',
       body: new FormData(contactForm)
     });
@@ -195,10 +195,13 @@ contactForm.addEventListener('submit', async (e) => {
       formNote.textContent = '✅ Message transmitted successfully!';
       contactForm.reset();
     } else {
-      throw new Error();
+      const errorMsg = res.error || 'Server error. Please try again later.';
+      formNote.textContent = `❌ ${errorMsg}`;
+      console.error('Form submission failed:', res);
     }
-  } catch {
-    formNote.textContent = '❌ Transmission failed. Check link stability.';
+  } catch (err) {
+    formNote.textContent = '❌ Connection failed. Check your internet or backend status.';
+    console.error('Fetch error:', err);
   } finally {
     btn.disabled = false;
     btn.textContent = 'Send Message';
