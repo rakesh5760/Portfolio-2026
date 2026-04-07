@@ -7,7 +7,7 @@ import os
 from dotenv import load_dotenv
 
 # Load environment variables
-load_dotenv()
+
 SENDER_EMAIL = os.getenv("EMAIL")
 SENDER_PASSWORD = os.getenv("APP_PASSWORD")
 
