@@ -186,7 +186,7 @@ contactForm.addEventListener('submit', async (e) => {
   formNote.textContent = 'Syncing with orbital servers...';
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/contact', {
+    const response = await fetch('https://portfolio-2026-1-dwwe.onrender.com/contact', {
       method: 'POST',
       body: new FormData(contactForm)
     });
