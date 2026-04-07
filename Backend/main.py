@@ -19,7 +19,8 @@ app.add_middleware(
     allow_origins=[
         "http://127.0.0.1:5500",
         "http://localhost:5500",
-        "https://rakeshgone.netlify.app"
+        "https://rakeshgone.netlify.app",
+        "https://rakeshgone.netlify.app/#contact"
     ],
     allow_methods=["*"],
     allow_headers=["*"],
