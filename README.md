@@ -101,4 +101,4 @@ Simply open `Frontend/index.html` in your browser or use a Live Server extension
 
 ---
 
-Built with ❤️ by [Rakesh Gone](https://github.com/rakesh5760)
+Built with ❤️ by [Gone Rakesh](https://github.com/rakesh5760)
